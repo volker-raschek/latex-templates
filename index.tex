@@ -1,7 +1,7 @@
 % Dokumentanklasse: a4paper, 14pt
 % Beschreibung:     Dokumentenformat
 % Option:           extraarticle - ?
-\documentclass[12pt]{article}
+\documentclass[a4paper, 12pt headsepline, numbers=noenddot]{scrartcl}
 
 % Packet:           xcolor
 % Beschreibung:     Define own color schemas
@@ -51,31 +51,23 @@
 % Beschreibung:     Ermöglicht es, ein Literaturverzeichnis zu führen
 % Option:
 \usepackage[
-  style=authoryear-icomp,    % Zitierstil (https://de.overleaf.com/learn/latex/Biblatex_bibliography_styles)
-  isbn=false,                % ISBN nicht anzeigen, gleiches geht mit nahezu allen anderen Feldern
-  pagetracker=true,          % ebd. bei wiederholten Angaben (false=ausgeschaltet, page=Seite, spread=Doppelseite, true=automatisch)
-  maxbibnames=50,            % maximale Namen, die im Literaturverzeichnis angezeigt werden
-  maxcitenames=3,            % maximale Namen, die im Text angezeigt werden, ab 4 wird u.a. nach den ersten Autor angezeigt
-  autocite=inline,           % regelt Aussehen für \autocite (inline=\parancite)
-  block=space,               % kleiner horizontaler Platz zwischen den Feldern
-  backref=true,              % Seiten anzeigen, auf denen die Referenz vorkommt
-  backend=biber,
-  backrefstyle=three+,       % fasst Seiten zusammen, z.B. S. 2f, 6ff, 7-10
-  date=short,                % Datumsformatbackend=biber
+  style=numeric,
+  citestyle=authoryear-icomp,
+  % style=authoryear-icomp,    % Zitierstil (https://de.overleaf.com/learn/latex/Biblatex_bibliography_styles)
+  % isbn=false,                % ISBN nicht anzeigen, gleiches geht mit nahezu allen anderen Feldern
+  % pagetracker=true,          % ebd. bei wiederholten Angaben (false=ausgeschaltet, page=Seite, spread=Doppelseite, true=automatisch)
+  % maxbibnames=50,            % maximale Namen, die im Literaturverzeichnis angezeigt werden
+  % maxcitenames=3,            % maximale Namen, die im Text angezeigt werden, ab 4 wird u.a. nach den ersten Autor angezeigt
+  % autocite=inline,           % regelt Aussehen für \autocite (inline=\parancite)
+  % block=space,               % kleiner horizontaler Platz zwischen den Feldern
+  % backref=true,              % Seiten anzeigen, auf denen die Referenz vorkommt
+  % backend=biber,
+  % backrefstyle=three+,       % fasst Seiten zusammen, z.B. S. 2f, 6ff, 7-10
+  % date=short,                % Datumsformatbackend=biber
 ]{biblatex}
 \setlength{\bibitemsep}{1em}     % Abstand zwischen den Literaturangaben
 \setlength{\bibhang}{2em}        % Einzug nach jeweils erster Zeile
-\addbibresource{referenzen//bibliothek.bib}
-
-% Paket:            caption
-% Beschreibung:     Bietet eine große Auswahl an Gestaltungsmöglichkeiten bezüglich der Beschriftung von Bildern und Tabellen.
-\usepackage{caption}
-
-% Paket:            colortbl
-% Beschreibung:     Ermöglicht Tabellen, Spalten oder Zellen farbig zu gestalten.
-% Befehle:          \columncolor
-% Dokumentation:    http://texdoc.net/texmf-dist/doc/latex/colortbl/colortbl.pdf
-\usepackage{colortbl}
+\addbibresource{./references/bibliography.bib}
 
 % Paket:            booktabs
 % Beschreibung:     Das Hauptaugenmerk von booktabs liegt dabei auf der Gestaltung der horizontalen Linien innerhalb einer Tabelle.
@@ -85,6 +77,16 @@
 %                   2) Verwende keine doppelten Linien.
 % Dokumentation:    https://www.namsu.de/Extra/pakete/Booktabs.html
 \usepackage{booktabs}
+
+% Paket:            caption
+% Beschreibung:     Bietet eine große Auswahl an Gestaltungsmöglichkeiten bezüglich der Beschriftung von Bildern und Tabellen.
+% \usepackage{caption}
+
+% Paket:            colortbl
+% Beschreibung:     Ermöglicht Tabellen, Spalten oder Zellen farbig zu gestalten.
+% Befehle:          \columncolor
+% Dokumentation:    http://texdoc.net/texmf-dist/doc/latex/colortbl/colortbl.pdf
+\usepackage{colortbl}
 
 % Paket:            courier
 % Beschreibung:     Lädt das Paket courier für Schriftarten mit fester Breite.
@@ -105,7 +107,9 @@
 % Paket:            enumitem
 % Beschreibung:     Zeilenabstände bei Aufzählungen definieren
 % Option:
+% Dokumentation:    http://ctan.triasinformatica.nl/macros/latex/contrib/enumitem/enumitem.pdf
 \usepackage{enumitem}
+\setlist{nosep}     % To remove the vertical space altogether in all lists.
 
 % Paket:            eurosym
 % Beschreibung:     Bildet das Euro-Zeichen in unterschiedlichen Varianten ab
@@ -149,6 +153,12 @@
 % Option:
 % Dokumentation:    http://mirror.utexas.edu/ctan/info/translations/footmisc/de/footmiscDE.pdf
 \usepackage[bottom]{footmisc}
+\setlength{\footnotemargin}{0.3em} % Fußnotenzahl einrücken
+
+\usepackage[T1]{fontenc}
+% Paket:            frontenc
+% Beschreibung:     Europäische Zeichensätze für Silbentrennung
+% Option:           T1 (Umlaute als ein Zeichen, also nicht a und ..)
 
 % Paket:            geometry
 % Beschreibung:     A4 Seitenabstände
@@ -189,29 +199,34 @@
   urlbordercolor=orange,            % color for url links, only visible if colorlinks=true
   linkbordercolor=red,              % color for page links, only visible if colorlinks=true
   pdfborderstyle={/S/U/W 1},        % border style will be underline of width 1pt
-  pdftitle={PDF-Title},
+  pdftitle={Masterthesis},
   pdfauthor={Markus Pesch},
-  pdfsubject={PDF-Subject},
-  pdfkeywords={},
-  pdfcreator={pdflatex},
+  pdfsubject={Konzeptionierung und Realisierung einer horizontal skalierbaren Clusterarchitektur},
+  pdfkeywords={B.Sc. Markus Pesch, Prof. Dr. Helge Rieder, FH Trier, Fachbereich Wirtschaft},
+  pdfcreator={latexmk},
   pdfproducer={LaTeX with hyperref}
 }
 
 % Paket:            glossaries
 % Beschreibung:     Das Paket glossaries muss nach dem Paket hyperref geladen werden
 % Dokumentation:    http://ftp.gwdg.de/pub/ctan/macros/latex/contrib/glossaries/glossaries-user.pdf
-% Option/en:
+% Options:
 %   acronyms        - This is equivalent to acronym=true and may be used in the document class option list.
 %   section         - This is a key=value option. Its value should be the name of a sectional unit (e.g. chapter).
 %                     This will make the glossaries appear in the named sectional unit, otherwise each glossary will
 %                     appear in a chapter, if chapters exist, otherwise in a section. Unnumbered sectional units will
 %                     be used by default.
 %   toc             - Add the glossaries to the table of contents.
-\usepackage[toc,acronyms]{glossaries}
-\makeglossaries
-\include{referenzen/glossar}
+%   xindy           - Xindy is a Perl script to sort entries. This application is more flexible than makeindex and is able to sort extended Latin
+%                     or non-Latin alphabets.
+\usepackage[acronyms, nomain, style=tree, toc, xindy]{glossaries}
+\GlsSetXdyLanguage{german}        % Deutsche Sprache
+\GlsSetXdyCodePage{duden-utf8}    % Codierung des Glossars
 
-% Paket:            utf8
+\makeglossaries
+\include{./references/glossary}
+
+% Paket:            inputec
 % Beschreibung:     Stellt Umlaute richtig dar
 % Option:           inputenc - Erlaubt die Darstellung der gleichen Zeichen (Character) wie sie in stdin überliefert werden
 \usepackage[utf8]{inputenc}
@@ -220,6 +235,15 @@
 % Beschreibung:
 % Option:
 \usepackage{lipsum}
+
+% Paket:            lmodern
+% Beschreibung:     Das lmodern (= Latin Modern) Paket verändert die verwendete Schriftart. Der Hauptunterschied ist die Darstellung der Schrift
+% innerhalb von pdf Dateien, während diese bei der Verwendung der normalen Standard Schriftart von Latex - Computer Modern - doch recht pixelige
+% auf den Betrachter wirkt, erscheint der Text der mit Latin Modern als Schriftart geschrieben worden ist doch um einiges flüßiger. Da die
+% überwiegende Anzahl der Dokumenten die mit Latex erstellt vom Dateityp her ein pdf sind sollte anstelle der bisherigen Standardschrift die
+% Schriftart Latin Modern verwendetet werden. Der nachfolgende Text wurde einmal mit der Standardschrift und dann mit Latin Modern ausgegeben.
+% Dokumentation:    https://www.namsu.de/Extra/pakete/Lmodern.html
+\usepackage{lmodern}
 
 % Paket:            makeindex
 % Beschreibung:     Ermöglicht das Indexieren von Wörter und den Befehl \printindex um den Index auszugeben
@@ -329,12 +353,6 @@
 % \begin{textblock*}{\textwidth}(0cm,0.5cm)
 \usepackage{textpos}
 
-% Paket:            tikz
-% Beschreibung:     TikZ and PGF are TeX packages for creating graphics programmatically.
-% Dokumentation:
-\usepackage{tikz}
-\usetikzlibrary{intersections}
-
 % Packet:           varwidth
 % Beschreibung:     The package defines a varwidth environment (based on minipage) which is an analogue
 %                   of minipage, but whose resulting width is the natural width of its contents.
@@ -369,7 +387,7 @@
   \immediate\write18{./git-info.sh url > git-url.tmp}
 
   % Importiere weitere .tex Dokumente
-  \include{./titel/titel}
+  \include{./title/title}
   \pagebreak
 
   % Pagestyle
@@ -414,9 +432,9 @@
   % \newpage
 
   % Glossary
-  % \printglossaries
-  % \newpage
+  \printglossaries
+  \newpage
 
   % Literatur
-  % \printbibliography[heading=bibintoc]
+  \printbibliography
 \end{document}
