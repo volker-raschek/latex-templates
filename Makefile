@@ -14,14 +14,17 @@ VERSION?=$(shell git rev-parse --short HEAD)-git
 # MAGE defines the docker image to compile latex into a pdf file.
 IMAGE:=volkerraschek/docker-latex:latest-ubuntu18.04
 
-
 # Input tex-file and output pdf-file
 FILE:=index
 PDF_FILE:=${FILE}.pdf
 IDX_FILE:=${FILE}.idx
 TEX_FILE:=${FILE}.tex
 
-# Hardlink Options
+# HARDLINK_VARIABLES
+# FSD:           Defines the general storage location for study documents.
+# HARDLINK_PATH: This should be extended with the value from FSD. For example
+#                for the subject Mathematics: ${FSD}/Mathematics
+# HARDLINK_FILE: Name of the document to be linked under the path HARDLINK_PATH.
 FSD?=${HOME}/Dokumente/Studium/Fachschaftsdaten
 HARDLINK_PATH:=${FSD}
 HARDLINK_FILE:=index.pdf
@@ -57,7 +60,7 @@ makeindex:
 
 # docker-latexmk
 # compile the pdf file with latexmk inside a docker container
-docker-latexmk:
+container-latexmk:
 	docker run \
 		--rm \
 		--user=${UID}:${GID} \
@@ -67,13 +70,13 @@ docker-latexmk:
 
 # docker-pdflatex
 # compile the pdf file with pdflatex inside a docker container
-docker-pdflatex:
+container-pdflatex:
 	docker run \
 		--rm \
 		--user=${UID}:${GID} \
 		--net=none \
 		--volume=${PWD}:/data ${IMAGE} \
-		make pdflatex
+		make pdflatex VERSION=${VERSION}
 
 # clean
 # remove all files which are ignored about .gitignore
