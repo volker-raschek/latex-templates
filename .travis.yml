@@ -2,7 +2,7 @@ services:
   - docker
 
 script:
-  - make docker-latexmk
+  - make container-latexmk
 
 deploy:
   provider: releases
