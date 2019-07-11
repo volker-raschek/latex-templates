@@ -1,8 +1,13 @@
-# Latex-Templates [![Build Status](https://travis-ci.com/fh-trier/latex-templates.svg?branch=master)](https://travis-ci.com/fh-trier/latex-templates)
+# Latex-Templates [![Build Status](https://travis-ci.com/fh-trier/latex-templates.svg?branch=sql)](https://travis-ci.com/fh-trier/latex-templates)
 
 ## Containing templates
 Currently containing templates, seperated by git branches:
 * master - Specialised for seminar papers, task sheets for tutorials or old exams
+* sql - Specialised for tex files which include sql files. Support execution of
+        sql files with sqlplus over make steps directly to an oracle database.
+        If docker is installed you can use your own database. Use the
+        docker-compose file to start the database. Login user is `system` and
+        password is `oracle`.
 * thesis - Specialised for Bachelor's or Master's theses
 
 ## Intoduction

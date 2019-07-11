@@ -1,0 +1,14 @@
+version: "2"
+services:
+  oracle:
+    container_name: oracle-db
+    image: quay.io/maksymbilenko/oracle-12c
+    ports:
+      - 8080:8080
+      - 1521:1521
+    volumes:
+      - oracle-db:/u01/app/oracle
+
+volumes:
+  oracle-db:
+    external: true
